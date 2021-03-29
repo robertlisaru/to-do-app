@@ -1,11 +1,18 @@
 import './App.css'
+import TodosList from './components/TodosList'
+import TodosListHook from './hooks/TodosListHook'
 
 function App() {
+  const data = TodosListHook()
+
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
         <h1>Todos</h1>
       </header>
+
+      <TodosList todos={data.todos} isFetching={data.isFetching} />
+
     </div>
   )
 }

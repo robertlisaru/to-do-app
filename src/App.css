@@ -1,3 +1,9 @@
 .App {
   text-align: center;
 }
+
+.TodosListWrapper ul {
+  list-style-type: none;
+  display: inline-block; 
+	text-align: left; 
+}
