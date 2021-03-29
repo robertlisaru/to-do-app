@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const TODOS_LIST_URL = "https://todo-backend-hanami.herokuapp.com/"
 
-const TodosListHook = () => {
+const useTodosList = () => {
     const [data, setData] = useState({ todos: [], isFetching: false })
 
     const fetchTodos = async () => {
@@ -28,4 +28,4 @@ const TodosListHook = () => {
     return data
 }
 
-export default TodosListHook
+export default useTodosList

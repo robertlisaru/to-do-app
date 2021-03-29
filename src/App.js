@@ -1,9 +1,9 @@
 import './App.css'
 import TodosList from './components/TodosList'
-import TodosListHook from './hooks/TodosListHook'
+import useTodosList from './hooks/useTodosList'
 
 function App() {
-  const data = TodosListHook()
+  const data = useTodosList()
 
   return (
     <div className="App">
