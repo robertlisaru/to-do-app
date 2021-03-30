@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 import Todos from './todos'
 
 function App() {
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState({ data: [], isLoading: true })
 
   useEffect(() => {
-    Todos.getAll().then((response) => setTodos(response.data))
+    Todos.getAll().then((response) => setTodos({ data: response.data, isLoading: false }))
   }, [])
 
   return (
@@ -16,7 +16,9 @@ function App() {
         <h1>Todos</h1>
       </header>
 
-      <TodosList todos={todos} isFetching={false} />
+      {todos.isLoading ? <p>Fetching todos...</p> :
+        <TodosList todos={todos.data} />
+      }
 
     </div>
   )
