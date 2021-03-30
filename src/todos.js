@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const TODOS_LIST_URL = "https://todo-backend-hanami.herokuapp.com/"
+const TODOS_URL = "https://todo-backend-hanami.herokuapp.com/"
 
 function getAll() {
-    return axios.get(TODOS_LIST_URL, {
+    return axios.get(TODOS_URL, {
         headers: {
             'Accept': 'application/json',
         }
@@ -11,7 +11,7 @@ function getAll() {
 }
 
 function create(todo) {
-    return axios.post(TODOS_LIST_URL, todo, {
+    return axios.post(TODOS_URL, todo, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
