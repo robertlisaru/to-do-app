@@ -1,9 +1,14 @@
 import './App.css'
 import TodosList from './components/TodosList'
-import useTodosList from './hooks/useTodosList'
+import { useState, useEffect } from 'react'
+import Todos from './todos'
 
 function App() {
-  const data = useTodosList()
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    Todos.getAll().then((response) => setTodos(response.data))
+  }, [])
 
   return (
     <div className="App">
@@ -11,7 +16,7 @@ function App() {
         <h1>Todos</h1>
       </header>
 
-      <TodosList todos={data.todos} isFetching={data.isFetching} />
+      <TodosList todos={todos} isFetching={false} />
 
     </div>
   )
