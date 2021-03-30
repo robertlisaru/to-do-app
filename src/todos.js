@@ -19,4 +19,14 @@ function create(todo) {
     })
 }
 
-export default { getAll, create }
+function update(oldTodo, newTodo) {
+    return axios.patch(oldTodo.url, newTodo, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
+
+export default { getAll, create, update }
