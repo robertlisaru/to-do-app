@@ -34,7 +34,7 @@ function App() {
             type='text'
             placeholder='What needs to be done' />
           <button onClick={createTodo}>Add</button>
-          <TodosList todos={todos.data} />
+          <TodosList todos={todos.data} notifyChange={fetchTodos} />
         </>
       }
 

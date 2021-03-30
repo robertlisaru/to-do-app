@@ -3,7 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Todos from './../todos'
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, notifyChange }) => {
     return (
         <li>
             <FormControlLabel
@@ -14,7 +14,7 @@ const Todo = ({ todo }) => {
                             Todos.update(todo,
                                 {
                                     "completed": event.target.checked
-                                })
+                                }).then(() => notifyChange())
                         }}
                     />
                 }
@@ -25,7 +25,8 @@ const Todo = ({ todo }) => {
 }
 
 Todo.propTypes = {
-    todo: PropTypes.object
+    todo: PropTypes.object,
+    notifyChange: PropTypes.func
 }
 
 export default Todo
