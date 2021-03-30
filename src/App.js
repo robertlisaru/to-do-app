@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import TodosList from './components/TodosList'
+import { useState, useEffect } from 'react'
+import Todos from './todos'
 
 function App() {
+  const [todos, setTodos] = useState({ data: [], isLoading: true })
+
+  useEffect(() => {
+    Todos.getAll().then((response) => setTodos({ data: response.data, isLoading: false }))
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>Todos</h1>
       </header>
+
+      {todos.isLoading ? <p>Fetching todos...</p> :
+        <TodosList todos={todos.data} />
+      }
+
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
