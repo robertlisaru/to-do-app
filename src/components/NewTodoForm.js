@@ -13,15 +13,16 @@ const NewTodoForm = ({ notifyChange }) => {
     }
 
     return (
-        <>
-            <input
-                type='text'
-                placeholder='What needs to be done'
-                value={newTodoTitle}
-                onChange={(event) => { setNewTodoTitle(event.target.value) }}
-            />
-            <button onClick={createTodo}>Add</button>
-        </>
+        <form>
+            <label>
+                <input
+                    placeholder='What needs to be done'
+                    value={newTodoTitle}
+                    onChange={(event) => { setNewTodoTitle(event.target.value) }}
+                />
+            </label>
+            <button type='button' onClick={createTodo}>Add</button>
+        </form>
     )
 }
 
