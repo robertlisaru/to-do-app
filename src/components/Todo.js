@@ -6,6 +6,7 @@ const Todo = ({ todo, notifyChange }) => {
     return (
         <li>
             <Checkbox
+                inputProps={{ 'data-test': 'todo' }}
                 checked={todo.completed}
                 onChange={(event) => {
                     Todos.update(todo,
