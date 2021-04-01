@@ -16,7 +16,7 @@ const NewTodoForm = ({ notifyChange }) => {
         <form>
             <label>
                 <input
-                    data-testid='newTodo'
+                    data-testid='newTodoInput'
                     placeholder='What needs to be done'
                     value={newTodoTitle}
                     onChange={(event) => {

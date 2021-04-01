@@ -59,19 +59,19 @@ beforeEach(() => {
 test("should render all todos", async () => {
     render(<App />)
 
-    expect((await screen.findAllByTestId('todo')).length).toEqual(4)
+    expect((await screen.findAllByTestId('todoLabel')).length).toEqual(4)
 })
 
 test("should create new todo", async () => {
     render(<App />)
 
-    fireEvent.change(await screen.findByTestId('newTodo'), { target: { value: 'meet Bob' } })
+    fireEvent.change(await screen.findByTestId('newTodoInput'), { target: { value: 'meet Bob' } })
     fireEvent.click(screen.getByTestId('addButton'))
 
     await waitFor(() => {
-        expect(screen.getAllByTestId('todo').length).toEqual(5)
+        expect(screen.getAllByTestId('todoLabel').length).toEqual(5)
     })
 
     expect(screen.getAllByTestId('todoLabel')[4]).toHaveTextContent('meet Bob')
-    expect(screen.getByTestId('newTodo')).toHaveValue('')
+    expect(screen.getByTestId('newTodoInput')).toHaveValue('')
 })
