@@ -1,18 +1,13 @@
 import App from '../App.js'
-import { render, unmountComponentAtNode } from 'react-dom'
-import { act, Simulate } from 'react-dom/test-utils'
 import Todos from '../todos'
+import '@testing-library/jest-dom/extend-expect'
+import { waitFor, render, screen, fireEvent } from '@testing-library/react'
 
 let todos = []
 
 jest.mock('../todos')
 
-let container = null
 beforeEach(() => {
-    // setup a DOM element as a render target
-    container = document.createElement("div")
-    document.body.appendChild(container)
-
     todos = [
         {
             "id": 1,
@@ -61,38 +56,22 @@ beforeEach(() => {
     })
 })
 
-afterEach(() => {
-    // cleanup on exiting
-    unmountComponentAtNode(container)
-    container.remove()
-    container = null
+test("should render all todos", async () => {
+    render(<App />)
+
+    expect((await screen.findAllByTestId('todo')).length).toEqual(4)
 })
 
-it("should render all todos", async () => {
-    await act(async () => {
-        render(<App />, container)
+test("should create new todo", async () => {
+    render(<App />)
+
+    fireEvent.change(await screen.findByTestId('newTodo'), { target: { value: 'meet Bob' } })
+    fireEvent.click(screen.getByTestId('addButton'))
+
+    await waitFor(() => {
+        expect(screen.getAllByTestId('todo').length).toEqual(5)
     })
 
-    expect(container.querySelectorAll("[data-test='todo']").length).toEqual(4)
-})
-
-it("should create new todo", async () => {
-    await act(async () => {
-        render(<App />, container)
-    })
-
-    await act(async () => {
-        const input = container.querySelector("[data-test='newTodo']")
-        input.value = 'meet Bob'
-        Simulate.change(input)
-    })
-
-    await act(async () => {
-        const addButton = container.querySelector("[data-test='addButton']")
-        Simulate.click(addButton)
-    })
-
-    expect(container.querySelectorAll("[data-test='todo']").length).toEqual(5)
-    expect(container.querySelectorAll("[data-test='todoLabel']")[4].textContent).toEqual('meet Bob')
-    expect(container.querySelector("[data-test='newTodo']").value).toEqual('')
+    expect(screen.getAllByTestId('todoLabel')[4]).toHaveTextContent('meet Bob')
+    expect(screen.getByTestId('newTodo')).toHaveValue('')
 })
