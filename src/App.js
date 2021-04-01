@@ -1,6 +1,6 @@
 import './App.css'
 import TodosList from './components/TodosList'
-import NewTodoForm from './components/NewTodoForm'
+import Header from './components/Header'
 import { useState, useEffect } from 'react'
 import Todos from './todos'
 
@@ -17,14 +17,10 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <header>
-        <h1>Todos</h1>
-      </header>
-
+    <div className="app">
       {todos.isLoading ? <p>Fetching todos...</p> :
         <>
-          <NewTodoForm notifyChange={fetchTodos} />
+          <Header notifyChange={fetchTodos} />
           <TodosList todos={todos.data} notifyChange={fetchTodos} />
         </>
       }
