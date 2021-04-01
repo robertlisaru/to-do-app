@@ -16,7 +16,7 @@ const NewTodoForm = ({ notifyChange }) => {
         <form>
             <label>
                 <input
-                    data-test='newTodo'
+                    data-testid='newTodo'
                     placeholder='What needs to be done'
                     value={newTodoTitle}
                     onChange={(event) => {
@@ -25,7 +25,7 @@ const NewTodoForm = ({ notifyChange }) => {
                 />
             </label>
             <button
-                data-test='addButton'
+                data-testid='addButton'
                 type='button'
                 onClick={createTodo}>Add
             </button>
