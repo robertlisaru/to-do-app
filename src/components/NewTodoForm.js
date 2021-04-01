@@ -16,12 +16,19 @@ const NewTodoForm = ({ notifyChange }) => {
         <form>
             <label>
                 <input
+                    data-test='newTodo'
                     placeholder='What needs to be done'
                     value={newTodoTitle}
-                    onChange={(event) => { setNewTodoTitle(event.target.value) }}
+                    onChange={(event) => {
+                        setNewTodoTitle(event.target.value)
+                    }}
                 />
             </label>
-            <button type='button' onClick={createTodo}>Add</button>
+            <button
+                data-test='addButton'
+                type='button'
+                onClick={createTodo}>Add
+            </button>
         </form>
     )
 }

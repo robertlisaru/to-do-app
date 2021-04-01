@@ -28,5 +28,4 @@ function update(oldTodo, newTodo) {
     })
 }
 
-
 export default { getAll, create, update }
