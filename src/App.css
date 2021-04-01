@@ -81,7 +81,7 @@ ul li {
 }
 
 ul li:nth-child(odd) {
-  background: #b2bec3;
+  background: #cedce2;
 }
 
 ul li:hover {
