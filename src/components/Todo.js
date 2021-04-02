@@ -15,7 +15,10 @@ const Todo = ({ todo, notifyChange }) => {
                         }).then(() => notifyChange())
                 }}
             />
-            <div data-testid="todoLabel">{todo.completed ? <s>{todo.title}</s> : todo.title}</div>
+            <div className='todoLabel'
+                data-testid="todoLabel">
+                {todo.completed ? <s>{todo.title}</s> : todo.title}
+            </div>
         </li>
     )
 }
