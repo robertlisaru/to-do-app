@@ -1,11 +1,14 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:jest-dom/recommended",
+        "plugin:testing-library/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -16,7 +19,9 @@
     },
     "plugins": [
         "react",
-        "react-hooks"
+        "react-hooks",
+        "testing-library",
+        "jest-dom"
     ],
     "rules": {
         "react/jsx-uses-react": "off",

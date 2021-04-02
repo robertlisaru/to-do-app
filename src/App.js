@@ -7,8 +7,9 @@ import Todos from './todos'
 function App() {
   const [todos, setTodos] = useState({ data: [], isLoading: true })
 
-  const fetchTodos = () => {
-    Todos.getAll().then((response) => setTodos({ data: response.data, isLoading: false }))
+  const fetchTodos = async () => {
+    const response = await Todos.getAll()
+    setTodos({ data: response.data, isLoading: false })
   }
 
   useEffect(() => {
