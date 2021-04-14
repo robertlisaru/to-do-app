@@ -86,19 +86,9 @@ ul li:hover {
   justify-content: space-between;
 }
 
-.todoCheckbox {
-
-}
-
 .todoLabel {
   font-family: 'Acme', sans-serif;
 } 
-
-.deleteButton {
-  flex-grow: 1;
-  margin-left: auto;
-  align-self: flex-end;
-}
 
 .deleteButton.MuiIconButton-root {
   margin-left: auto;
