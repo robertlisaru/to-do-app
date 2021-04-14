@@ -57,15 +57,7 @@ input {
   color: #FFF;
 }
 
-.todoLabel {
-  display: inline-block; 
-  font-family: 'Acme', sans-serif;
-} 
-
 ul li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
   list-style-type: none;
   background: #eee;
   font-size: 14px;
@@ -86,4 +78,18 @@ ul li:nth-child(odd) {
 
 ul li:hover {
   background: #ddd;
+}
+
+.todoFlexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todoLabel {
+  font-family: 'Acme', sans-serif;
+} 
+
+.deleteButton.MuiIconButton-root {
+  margin-left: auto;
 }
