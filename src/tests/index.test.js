@@ -1,7 +1,7 @@
 import App from '../App.js'
 import Todos from '../todos'
 import '@testing-library/jest-dom/extend-expect'
-import { waitFor, render, screen, fireEvent } from '@testing-library/react'
+import { waitFor, render, screen, fireEvent, waitForElementToBeRemoved } from '@testing-library/react'
 
 let todos = []
 
@@ -79,7 +79,6 @@ test("should create new todo", async () => {
     await waitFor(() => {
         expect(screen.getAllByTestId('todo-label').length).toEqual(5)
     })
-
     expect(screen.getAllByTestId('todo-label')[4]).toHaveTextContent('meet Bob')
     expect(screen.getByTestId('new-todo-input')).toHaveValue('')
 })
@@ -90,14 +89,9 @@ test("should not delete todo with single click", async () => {
     await waitFor(() => {
         expect(screen.getAllByTestId('todo-label').length).toEqual(4)
     })
-
     expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('adjust moon orbit')
-
     fireEvent.click(screen.getByTestId('todo-delete-btn-2'))
-    await waitFor(() => {
-        expect(screen.getAllByTestId('todo-label').length).toEqual(4)
-    })
-
+    expect(screen.getAllByTestId('todo-label').length).toEqual(4)
     expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('adjust moon orbit')
 })
 
@@ -107,18 +101,13 @@ test("should delete todo with second click", async () => {
     await waitFor(() => {
         expect(screen.getAllByTestId('todo-label').length).toEqual(4)
     })
-
     expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('adjust moon orbit')
-
     fireEvent.click(screen.getByTestId('todo-delete-btn-2'))
 
     await screen.findByTestId('delete-message-snackbar')
-
     fireEvent.click(screen.getByTestId('todo-delete-btn-2'))
 
-    await waitFor(() => {
-        expect(screen.getAllByTestId('todo-label').length).toEqual(3)
-    })
-
+    await waitForElementToBeRemoved(screen.getByTestId('todo-delete-btn-2'))
+    expect(screen.getAllByTestId('todo-label').length).toEqual(3)
     expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('sleep')
 })
