@@ -54,6 +54,14 @@ beforeEach(() => {
             data: newTodo
         })
     })
+    Todos.remove.mockImplementation((todo) => {
+        for (var i = 0; i < todos.length; i++) {
+            if (todos[i].id === todo.id) {
+                todos.splice(i, 1)
+            }
+        }
+        return Promise.resolve({})
+    })
 })
 
 test("should render all todos", async () => {
@@ -74,4 +82,21 @@ test("should create new todo", async () => {
 
     expect(screen.getAllByTestId('todoLabel')[4]).toHaveTextContent('meet Bob')
     expect(screen.getByTestId('newTodoInput')).toHaveValue('')
+})
+
+test("should delete todo", async () => {
+    render(<App />)
+
+    await waitFor(() => {
+        expect(screen.getAllByTestId('todoLabel').length).toEqual(4)
+    })
+
+    expect(screen.getAllByTestId('todoLabel')[1]).toHaveTextContent('adjust moon orbit')
+
+    fireEvent.click(screen.getByTestId('todoDeleteButton2'))
+    await waitFor(() => {
+        expect(screen.getAllByTestId('todoLabel').length).toEqual(3)
+    })
+
+    expect(screen.getAllByTestId('todoLabel')[1]).toHaveTextContent('sleep')
 })

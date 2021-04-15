@@ -24,6 +24,7 @@ const Todo = ({ todo, notifyChange }) => {
                     {todo.completed ? <s>{todo.title}</s> : todo.title}
                 </div>
                 <IconButton
+                    data-testid={`todoDeleteButton${todo.id}`}
                     onClick={() => { Todos.remove(todo).then(() => notifyChange()) }}
                     aria-label="delete"
                     className='deleteButton'>
