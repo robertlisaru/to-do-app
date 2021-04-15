@@ -38,7 +38,7 @@ input {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.addBtn {
+.add-btn {
   width: 25%;
   padding: 10px;
   margin-left:0;
@@ -52,7 +52,7 @@ input {
   font-weight: bold;
 }
 
-.addBtn:hover {
+.add-btn:hover {
   background-color: #bbb;
   color: #FFF;
 }
@@ -80,16 +80,16 @@ ul li:hover {
   background: #ddd;
 }
 
-.todoFlexContainer {
+.todo-flex-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.todoLabel {
+.todo-label {
   font-family: 'Acme', sans-serif;
 } 
 
-.deleteButton.MuiIconButton-root {
+.delete-btn.MuiIconButton-root {
   margin-left: auto;
 }

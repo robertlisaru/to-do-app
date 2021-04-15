@@ -54,24 +54,49 @@ beforeEach(() => {
             data: newTodo
         })
     })
+    Todos.remove.mockImplementation((todo) => {
+        for (var i = 0; i < todos.length; i++) {
+            if (todos[i].id === todo.id) {
+                todos.splice(i, 1)
+            }
+        }
+        return Promise.resolve({})
+    })
 })
 
 test("should render all todos", async () => {
     render(<App />)
 
-    expect((await screen.findAllByTestId('todoLabel')).length).toEqual(4)
+    expect((await screen.findAllByTestId('todo-label')).length).toEqual(4)
 })
 
 test("should create new todo", async () => {
     render(<App />)
 
-    fireEvent.change(await screen.findByTestId('newTodoInput'), { target: { value: 'meet Bob' } })
-    fireEvent.click(screen.getByTestId('addButton'))
+    fireEvent.change(await screen.findByTestId('new-todo-input'), { target: { value: 'meet Bob' } })
+    fireEvent.click(screen.getByTestId('add-btn'))
 
     await waitFor(() => {
-        expect(screen.getAllByTestId('todoLabel').length).toEqual(5)
+        expect(screen.getAllByTestId('todo-label').length).toEqual(5)
     })
 
-    expect(screen.getAllByTestId('todoLabel')[4]).toHaveTextContent('meet Bob')
-    expect(screen.getByTestId('newTodoInput')).toHaveValue('')
+    expect(screen.getAllByTestId('todo-label')[4]).toHaveTextContent('meet Bob')
+    expect(screen.getByTestId('new-todo-input')).toHaveValue('')
+})
+
+test("should delete todo", async () => {
+    render(<App />)
+
+    await waitFor(() => {
+        expect(screen.getAllByTestId('todo-label').length).toEqual(4)
+    })
+
+    expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('adjust moon orbit')
+
+    fireEvent.click(screen.getByTestId('todo-delete-btn-2'))
+    await waitFor(() => {
+        expect(screen.getAllByTestId('todo-label').length).toEqual(3)
+    })
+
+    expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('sleep')
 })
