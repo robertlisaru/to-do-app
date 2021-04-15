@@ -84,7 +84,7 @@ test("should create new todo", async () => {
     expect(screen.getByTestId('new-todo-input')).toHaveValue('')
 })
 
-test("should delete todo", async () => {
+test("should not delete todo with single click", async () => {
     render(<App />)
 
     await waitFor(() => {
@@ -94,6 +94,28 @@ test("should delete todo", async () => {
     expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('adjust moon orbit')
 
     fireEvent.click(screen.getByTestId('todo-delete-btn-2'))
+    await waitFor(() => {
+        expect(screen.getAllByTestId('todo-label').length).toEqual(4)
+    })
+
+    expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('adjust moon orbit')
+})
+
+test("should delete todo with second click", async () => {
+    render(<App />)
+
+    await waitFor(() => {
+        expect(screen.getAllByTestId('todo-label').length).toEqual(4)
+    })
+
+    expect(screen.getAllByTestId('todo-label')[1]).toHaveTextContent('adjust moon orbit')
+
+    fireEvent.click(screen.getByTestId('todo-delete-btn-2'))
+
+    await screen.findByTestId('delete-message-snackbar')
+
+    fireEvent.click(screen.getByTestId('todo-delete-btn-2'))
+
     await waitFor(() => {
         expect(screen.getAllByTestId('todo-label').length).toEqual(3)
     })

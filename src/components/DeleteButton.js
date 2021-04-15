@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import DeleteIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -32,6 +31,7 @@ const DeleteButton = ({ todo, notifyChange }) => {
             <DeleteIcon />
         </IconButton>
         <Snackbar
+            data-testid='delete-message-snackbar'
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'center',
@@ -49,11 +49,6 @@ const DeleteButton = ({ todo, notifyChange }) => {
             }
         />
     </>
-}
-
-DeleteButton.propTypes = {
-    todo: PropTypes.object,
-    notifyChange: PropTypes.func
 }
 
 export default DeleteButton

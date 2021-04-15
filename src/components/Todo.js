@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import Checkbox from '@material-ui/core/Checkbox'
 import DeleteButton from './DeleteButton'
 import Todos from './../todos'
@@ -26,11 +25,6 @@ const Todo = ({ todo, notifyChange }) => {
             </div>
         </li>
     )
-}
-
-Todo.propTypes = {
-    todo: PropTypes.object,
-    notifyChange: PropTypes.func
 }
 
 export default Todo

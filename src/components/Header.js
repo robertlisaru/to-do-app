@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Todos from '../todos'
 
@@ -31,10 +30,6 @@ const Header = ({ notifyChange }) => {
             </span>
         </header>
     )
-}
-
-Header.propTypes = {
-    notifyChange: PropTypes.func
 }
 
 export default Header
