@@ -1,54 +1,34 @@
 import DeleteIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
-import Snackbar from '@material-ui/core/Snackbar'
 import Todos from './../todos'
-import { useState, Fragment } from 'react'
+import { useState, useEffect } from 'react'
 
 const DeleteButton = ({ todo, notifyChange }) => {
-    const [snackbarOpen, setSnackbarOpen] = useState(false)
+    const [isPrimed, setIsPrimed] = useState(false)
 
     const handleClick = () => {
-        if (snackbarOpen) {
+        if (isPrimed) {
             Todos.remove(todo).then(() => notifyChange())
         } else {
-            setSnackbarOpen(true)
+            setIsPrimed(true)
         }
     }
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return
-        }
-        setSnackbarOpen(false)
-    }
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setIsPrimed(false)
+        }, 3000)
 
-    return <>
-        <IconButton
-            data-testid={`todo-delete-btn-${todo.id}`}
-            onClick={handleClick}
-            aria-label="delete"
-            className='delete-btn'>
-            <DeleteIcon />
-        </IconButton>
-        <Snackbar
-            data-testid='delete-message-snackbar'
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-            }}
-            open={snackbarOpen}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            message='Tap again to delete'
-            action={
-                <Fragment>
-                    <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-                        <DeleteIcon fontSize="small" />
-                    </IconButton>
-                </Fragment>
-            }
-        />
-    </>
+        return () => clearTimeout(timeout)
+    }, [isPrimed])
+
+    return <IconButton
+        data-testid={`todo-delete-btn-${todo.id}`}
+        onClick={handleClick}
+        aria-label="delete"
+        className={isPrimed ? 'pulsing-btn' : 'delete-btn'}>
+        <DeleteIcon />
+    </IconButton>
 }
 
 export default DeleteButton
