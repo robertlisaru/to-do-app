@@ -7,10 +7,10 @@ import Todos from './../todos'
 const Todo = ({ todo, notifyChange }) => {
     return (
         <li>
-            <div className='todoFlexContainer'>
+            <div className='todo-flex-container'>
                 <Checkbox
-                    className='todoCheckbox'
-                    inputProps={{ 'data-testid': 'todoCheckbox' }}
+                    className='todo-checkbox'
+                    inputProps={{ 'data-testid': 'todo-checkbox' }}
                     checked={todo.completed}
                     onChange={(event) => {
                         Todos.update(todo,
@@ -19,15 +19,15 @@ const Todo = ({ todo, notifyChange }) => {
                             }).then(() => notifyChange())
                     }}
                 />
-                <div className='todoLabel'
-                    data-testid="todoLabel">
+                <div className='todo-label'
+                    data-testid="todo-label">
                     {todo.completed ? <s>{todo.title}</s> : todo.title}
                 </div>
                 <IconButton
-                    data-testid={`todoDeleteButton${todo.id}`}
+                    data-testid={`todo-delete-btn-${todo.id}`}
                     onClick={() => { Todos.remove(todo).then(() => notifyChange()) }}
                     aria-label="delete"
-                    className='deleteButton'>
+                    className='delete-btn'>
                     <DeleteIcon />
                 </IconButton>
             </div>

@@ -16,7 +16,7 @@ const Header = ({ notifyChange }) => {
         <header className='header'>
             <h1>Todos</h1>
             <input
-                data-testid='newTodoInput'
+                data-testid='new-todo-input'
                 placeholder='What needs to be done'
                 value={newTodoTitle}
                 onChange={(event) => {
@@ -24,8 +24,8 @@ const Header = ({ notifyChange }) => {
                 }}
             />
             <span
-                className='addBtn'
-                data-testid='addButton'
+                className='add-btn'
+                data-testid='add-btn'
                 onClick={createTodo}>
                 Add
             </span>
