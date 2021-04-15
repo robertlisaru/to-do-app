@@ -23,7 +23,7 @@ const DeleteButton = ({ todo, notifyChange }) => {
     }, [isPrimed])
 
     return <IconButton
-        data-testid={`todo-delete-btn-${todo.id}`}
+        data-testid={isPrimed ? `pulsing-btn-${todo.id}` : `delete-btn-${todo.id}`}
         onClick={handleClick}
         aria-label="delete"
         className={isPrimed ? 'pulsing-btn' : 'delete-btn'}>
