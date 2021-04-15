@@ -3,6 +3,7 @@ import TodosList from './components/TodosList'
 import Header from './components/Header'
 import { useState, useEffect } from 'react'
 import Todos from './todos'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 function App() {
   const [todos, setTodos] = useState({ data: [], isLoading: true })
@@ -18,14 +19,16 @@ function App() {
 
   return (
     <div className="app">
-      {todos.isLoading ? <p>Fetching todos...</p> :
+      {todos.isLoading ?
+        <LinearProgress />
+        :
         <>
           <Header notifyChange={fetchTodos} />
           <TodosList todos={todos.data} notifyChange={fetchTodos} />
         </>
       }
 
-    </div>
+    </div >
   )
 }
 
